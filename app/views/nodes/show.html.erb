@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @node.name %>
+</p>
+
+<p>
+  <b>Deactivated:</b>
+  <%= @node.deactivated %>
+</p>
+
+<p>
+  <b>Catalog timestamp:</b>
+  <%= @node.catalog_timestamp %>
+</p>
+
+<p>
+  <b>Facts timestamp:</b>
+  <%= @node.facts_timestamp %>
+</p>
+<p>
+  <b>Host Facts:</b>
+</p>
+<%= @node_facts %>
+
+
+<%= link_to 'Edit', edit_node_path(@node) %> |
+<%= link_to 'Back', nodes_path %>

@@ -1,0 +1,19 @@
+class Node < ActiveResource::Base
+  include ActiveResource::Extend::WithoutExtension
+
+  def initialize(attributes = {}, persisted = false) 
+    super 
+    self.id = self.name.gsub('.', '_')
+  end
+
+  self.site = "http://puppetdb001.int.arvm.de:8080/v3"
+  self.element_name = "nodes"
+  self.format = ::JsonFormatter.new(:collection_name)
+
+
+  def node_facts
+    Node.find(self.id+'/facts')
+  end 
+   has_many :facts
+
+end

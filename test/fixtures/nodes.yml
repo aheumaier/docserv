@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  deactivated: MyString
+  catalog_timestamp: MyString
+  facts_timestamp: MyString
+
+two:
+  name: MyString
+  deactivated: MyString
+  catalog_timestamp: MyString
+  facts_timestamp: MyString

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+
+<% @fact.each do |fact_hash| %>
+
+<p>
+  <b>Name:</b>
+  <%= fact_hash.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= fact_hash.value %>
+</p>
+
+<% end %>
+
+<%= link_to 'Edit', edit_fact_path(@fact) %> |
+<%= link_to 'Back', facts_path %>
