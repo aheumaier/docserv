@@ -19,12 +19,7 @@ class JsonFormatter
     if data.is_a?(Hash) && data[collection_name]
       data[collection_name]
     else
-      if data.is_a? Array
-        Rails.logger.info 'i am an '+data.class.to_s
-        data = data.reduce Hash.new, :merge
-      else
         data
-      end
     end
   end
 end

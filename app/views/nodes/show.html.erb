@@ -20,9 +20,32 @@
   <%= @node.facts_timestamp %>
 </p>
 <p>
-  <b>Host Facts:</b>
+  <b>ArtifactID:</b>
+  <%= @node_artifact_id %>
 </p>
-<%= @node_facts %>
+<p>
+  <b> Facts:</b>
+</p>
+<table>
+  <tr>
+    <th>Fact Name</th>
+    <th>Fact Value</th>
+  </tr>
+
+<% @node_facts.each do |k,v| %>
+  <tr>
+    <td><%= k %></td>
+    <td><%= v %></td>
+  </tr>
+<% end %>
+</table>
+
+<p>
+  <b>Wiki:</b>
+  <p>
+  <%= @wiki.raw_data %>
+  </p>
+</p>
 
 
 <%= link_to 'Edit', edit_node_path(@node) %> |
