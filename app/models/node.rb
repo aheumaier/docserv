@@ -12,8 +12,14 @@ class Node < ActiveResource::Base
   self.format = JsonFormatter.new("nodes")
 
 
-  def self.facts(node_name)
-    Node.find(:all, :from => '/v3/nodes/'+node_name+'/facts')
+  def facts
+    pocket = Hash.new
+    Node.find(:all, :from => '/v3/nodes/'+self.name+'/facts').map {|n| pocket[n.name] = n.value }
+    return pocket
+  end
+
+  def artifact_id
+    Node.find(:first, :from => '/v3/nodes/'+self.name+'/facts/artifact_id').value
   end
 
 

@@ -1,6 +1,6 @@
 # Gollum file
 class Page < GollumRails::Page
-  
+
   # callbacks:
   #
   #  after_save :after_save
