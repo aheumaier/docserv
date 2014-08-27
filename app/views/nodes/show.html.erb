@@ -60,14 +60,15 @@
     <div class="container">
       <h3>Author Metadata</h3>
       <dl>
-        <% @wiki.commit[:commit].each do |k,v| %>
+        <% @page.commit[:commit].each do |k,v| %>
             <dt><%= k %>:</dt>
             <dd><%= v %></dd>
         <% end %>
       </dl>
+      <%= @page.history %>
       <h3>Content</h3>
       <p>
-        <%= raw(@wiki.content) %>
+        <%= raw(@page.content) %>
       </p>
       <%= link_to '(Edit)', edit_page_path %>
     </div>

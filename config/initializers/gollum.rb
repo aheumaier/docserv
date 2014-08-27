@@ -18,5 +18,5 @@ GollumRails::Setup.build do |config|
   # Possible values are:
   #
   # true or false
-  config.startup = false
+  config.startup = true
 end

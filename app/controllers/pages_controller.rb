@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
-  before_filter :find_page, :except => [:new, :show, :create, :index]
-  before_filter :find_body, :only => [:edit]
+  #before_filter :find_page, :except => [:new, :show, :create, :index]
+  #before_filter :find_body, :only => [:edit]
 
   def new
     @page = Page.new
@@ -41,6 +41,9 @@ class PagesController < ApplicationController
   end
 
   def edit
+    @page = Page.find(params[:id])
+
+
   end
 
   def update
@@ -68,7 +71,7 @@ class PagesController < ApplicationController
   end
 
   def find_body
-    @page.body = params[:page][:body] rescue @page.raw_content
+    @page.body = params[:page][:body] rescue @page
   end
 
 end
