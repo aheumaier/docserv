@@ -1,20 +1,17 @@
 <h1>Listing nodes</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>Deactivated</th>
     <th>Catalog timestamp</th>
     <th>Facts timestamp</th>
     <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 
 <% @nodes.each do |node| %>
   <tr>
     <td><%= node.name %></td>
-    <td><%= node.deactivated %></td>
     <td><%= node.catalog_timestamp %></td>
     <td><%= node.facts_timestamp %></td>
     <td><%= link_to 'Show', node  %></td>
@@ -22,6 +19,4 @@
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'New Node', new_node_path %>

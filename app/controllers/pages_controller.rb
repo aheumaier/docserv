@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @page = Page.find_or_initialize_by_name(params[:id], commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+params[:id] }))
+    @page = Page.find_or_initialize_by_name(params[:id], commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+params[:id] })
 
     respond_to do |format|
       format.html # show.html.erb

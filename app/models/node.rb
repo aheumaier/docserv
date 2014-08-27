@@ -19,7 +19,7 @@ class Node < ActiveResource::Base
   end
 
   def artifact_id
-    Node.find(:first, :from => '/v3/nodes/'+self.name+'/facts/artifact_id').value
+    Node.find(:first, :from => '/v3/nodes/'+self.name+'/facts/system_role').value
   end
 
 

@@ -1,60 +1,79 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <b>Node:</b>
-  <%= @node.name %>
-</h1>
+<div class="jumbotron">
+  <div class="container">
+    <div class="page-header">
+      <h1><%= @node.name %> <br> <small><%= @node_artifact_id %></small></h1>
+    </div>
 
-<p>
-  <b>Deactivated:</b>
-  <%= @node.deactivated %>
-</p>
-
-<p>
-  <b>Catalog timestamp:</b>
-  <%= @node.catalog_timestamp %>
-</p>
-
-<p>
-  <b>Facts timestamp:</b>
-  <%= @node.facts_timestamp %>
-</p>
-<p>
-  <b>ArtifactID:</b>
-  <%= @node_artifact_id %>
-</p>
-<h1>
-  <b> Facts:</b>
-</h1>
-<table>
-  <tr>
-    <th>Fact Name</th>
-    <th>Fact Value</th>
-  </tr>
-
-<% @node_facts.each do |k,v| %>
-  <tr>
-    <td><%= k %></td>
-    <td><%= v %></td>
-  </tr>
-<% end %>
-</table>
-
-<h1>Wiki</h1>
-<h3>Author</h3>
-  <p>
-    <% @wiki.commit[:commit].each do |k,v| %>
-
-    <%= k %>:<%= v %> <br>
-
-    <% end %>
-  </p>
-<h3>Content</h3>
-  <p>
-    <%= @wiki.content %>
-  </p>
-</p>
+    <% unless  @node.deactivated.nil? %>
+        <p>
+          <span class="label label-danger">Node deactivated</span>
+        </p>
+    <% else %>
+        <p>
+          <span class="label label-success">Node active</span>
+        </p>
+        <i>Catalog timestamp:</>
+        <%= @node.catalog_timestamp %><br>
+        <i>Facts timestamp:</i>
+        <%= @node.facts_timestamp %>
+    <%end %>
+  </div>
+</div>
 
 
-<%= link_to 'Edit', edit_node_path(@node) %> |
+<div class="tabbable">
+  <ul class="nav nav-tabs" id="proftabs">
+  <li><a  href="#status_tab"  data-toggle="tab" >Status</a></li>
+  <li><a  href="#facts_tab" data-toggle="tab">Facts</a></li>
+  <li><a  href="#wiki_tab" data-toggle="tab">Wiki</a></li>
+  </ul>
+</div>
+
+<div class="tab-content">
+  <div id="status_tab"  class="tab-pane">
+    <div class="container">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Error ex harum iste magnam necessitatibus sed sit. A adipisci amet cupiditate delectus
+        dolor itaque numquam officia omnis, provident quod temporibus voluptatibus?</p>
+    </div>
+  </div>
+
+  <div id="facts_tab" class="tab-pane">
+    <table class="table table-condensed" >
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+
+      <% @node_facts.each do |k,v| %>
+          <tr>
+            <td><%= k %></td>
+            <td><%= v %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div id="wiki_tab"  class="tab-pane">
+    <div class="container">
+      <h3>Author Metadata</h3>
+      <dl>
+        <% @wiki.commit[:commit].each do |k,v| %>
+            <dt><%= k %>:</dt>
+            <dd><%= v %></dd>
+        <% end %>
+      </dl>
+      <h3>Content</h3>
+      <p>
+        <%= raw(@wiki.content) %>
+      </p>
+      <%= link_to '(Edit)', edit_page_path %>
+    </div>
+  </div>
+</div>
+
+
+
 <%= link_to 'Back', nodes_path %>
