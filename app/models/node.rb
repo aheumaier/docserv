@@ -9,11 +9,11 @@ class Node < ActiveResource::Base
 
   self.site = "http://puppetdb001.int.arvm.de:8080/v3"
   self.element_name = "nodes"
-  self.format = ::JsonFormatter.new(:facts)
+  self.format = JsonFormatter.new("nodes")
+
 
   def self.facts(node_name)
-    Node.find(node_name+'/facts')
-   
+    Node.find(:all, :from => '/v3/nodes/'+node_name+'/facts')
   end
 
 
