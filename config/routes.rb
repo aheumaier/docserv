@@ -1,8 +1,8 @@
 Docserv::Application.routes.draw do
+
+  resources :pages
   resources :facts
-
   resources :nodes
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

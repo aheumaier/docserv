@@ -7,6 +7,8 @@ gem 'gollum'
 gem 'gollum_rails'
 gem 'activeresource'
 gem 'json'
+gem 'haml'
+gem 'awesome_nested_set'
 
 
 # Gems used only for assets and not required
