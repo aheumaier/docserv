@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
+<h1>
+  <b>Node:</b>
   <%= @node.name %>
-</p>
+</h1>
 
 <p>
   <b>Deactivated:</b>
@@ -23,9 +23,9 @@
   <b>ArtifactID:</b>
   <%= @node_artifact_id %>
 </p>
-<p>
+<h1>
   <b> Facts:</b>
-</p>
+</h1>
 <table>
   <tr>
     <th>Fact Name</th>
@@ -40,10 +40,18 @@
 <% end %>
 </table>
 
-<p>
-  <b>Wiki:</b>
+<h1>Wiki</h1>
+<h3>Author</h3>
   <p>
-  <%= @wiki.raw_data %>
+    <% @wiki.commit[:commit].each do |k,v| %>
+
+    <%= k %>:<%= v %> <br>
+
+    <% end %>
+  </p>
+<h3>Content</h3>
+  <p>
+    <%= @wiki.content %>
   </p>
 </p>
 

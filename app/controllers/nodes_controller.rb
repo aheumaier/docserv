@@ -16,7 +16,7 @@ class NodesController < ApplicationController
     @node = Node.find(params[:id].gsub('_', '.'))
     @node_facts = @node.facts
     @node_artifact_id = @node.artifact_id
-    @wiki = Page.find(@node_artifact_id)
+    @wiki = Page.find_or_initialize_by_name(@node_artifact_id, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+params[:id] })
 
     respond_to do |format|
       format.html # show.html.erb
