@@ -10,6 +10,7 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
+    logger.info 'Logger: calling Page#index '
     @pages = Page.all
 
     respond_to do |format|
@@ -21,6 +22,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+    logger.info 'Logger: calling Page#show '
     @page = Page.find_or_initialize_by_name(params[:id], commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+params[:id] })
 
     respond_to do |format|
@@ -31,6 +33,7 @@ class PagesController < ApplicationController
 
 
   def create
+    logger.info 'Logger: calling Page#create '
     @page = Page.new(params[:page])
     if @page.save
       flash[:notice] = "Successfully created page."
@@ -41,16 +44,19 @@ class PagesController < ApplicationController
   end
 
   def edit
+    logger.info 'Logger: calling Page#edit '
     @page = Page.find(params[:id])
-
-
   end
 
   def update
+    logger.info 'Logger: calling Page#update '
+    @page = Page.find(params[:id])
+    params[:page]['commit'] = { name: 'system', email: 'sysop@mondiamedia.com', message: 'Updated page '+params[:id] }
     if @page.update_attributes(params[:page])
       flash[:notice] = "Successfully updated page."
       redirect_to @page
     else
+      logger.info 'Logger: calling Page#udate : Failed '
       render :action => 'edit'
     end
   end
@@ -58,20 +64,6 @@ class PagesController < ApplicationController
   def destroy
     @page.destroy
     flash[:notice] = "Successfully destroyed page."
-  end
-
-  def preview
-    render :text => @page.preview(params[:data])
-  end
-
-  private
-
-  def find_page
-    @page = Page.find(params[:id])
-  end
-
-  def find_body
-    @page.body = params[:page][:body] rescue @page
   end
 
 end

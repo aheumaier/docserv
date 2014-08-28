@@ -14,7 +14,7 @@
         <p>
           <span class="label label-success">Node active</span>
         </p>
-        <i>Catalog timestamp:</>
+        <i>Catalog timestamp:</i>
         <%= @node.catalog_timestamp %><br>
         <i>Facts timestamp:</i>
         <%= @node.facts_timestamp %>
@@ -58,14 +58,7 @@
 
   <div id="wiki_tab"  class="tab-pane">
     <div class="container">
-      <h3>Author Metadata</h3>
-      <dl>
-        <% @page.commit[:commit].each do |k,v| %>
-            <dt><%= k %>:</dt>
-            <dd><%= v %></dd>
-        <% end %>
-      </dl>
-      <%= @page.history %>
+      <small><%= "Last edited by #{@page.gollum_page.version.author.name.gsub(/<>/, '')} #{time_ago_in_words(@page.gollum_page.version.authored_date)} ago." %></small>
       <h3>Content</h3>
       <p>
         <%= raw(@page.content) %>

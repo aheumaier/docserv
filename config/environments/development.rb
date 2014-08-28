@@ -8,6 +8,7 @@ Docserv::Application.configure do
 
   Rails.logger = Logger.new(STDOUT)
   Rails.logger.level = 0 # at any time
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -31,5 +32,5 @@ Docserv::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 end
