@@ -25,19 +25,43 @@
 
 <div class="tabbable">
   <ul class="nav nav-tabs" id="proftabs">
-  <li><a  href="#status_tab"  data-toggle="tab" >Status</a></li>
-  <li><a  href="#facts_tab" data-toggle="tab">Facts</a></li>
-  <li><a  href="#wiki_tab" data-toggle="tab">Wiki</a></li>
+    <li class="active"><a  href="#status_tab"  data-toggle="tab" >Status</a></li>
+    <li><a  href="#puppet_tab"  data-toggle="tab" >Puppet</a></li>
+    <li><a  href="#resources_tab"  data-toggle="tab" >Resources</a></li>
+    <li><a  href="#facts_tab" data-toggle="tab">Facts</a></li>
+    <li><a  href="#wiki_tab" data-toggle="tab">Wiki</a></li>
   </ul>
 </div>
 
 <div class="tab-content">
-  <div id="status_tab"  class="tab-pane">
+  <div id="status_tab"  class="tab-pane active">
     <div class="container">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Error ex harum iste magnam necessitatibus sed sit. A adipisci amet cupiditate delectus
-        dolor itaque numquam officia omnis, provident quod temporibus voluptatibus?</p>
+      <p></p>
+      Node Status
     </div>
+  </div>
+  <div id="puppet_tab"  class="tab-pane">
+    <div class="container">
+      <p></p>
+      Last Puppet Run: <%= @node_facts['last_run']%>
+    </div>
+  </div>
+  <div id="resources_tab"  class="tab-pane">
+
+    <table class="table table-condensed" >
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+
+      <% @node_facts.each do |k,v| %>
+          <tr>
+            <td><%= k %></td>
+            <td><%= v %></td>
+          </tr>
+      <% end %>
+    </table>
+
   </div>
 
   <div id="facts_tab" class="tab-pane">
@@ -59,15 +83,15 @@
   <div id="wiki_tab"  class="tab-pane">
     <div class="container">
       <small><%= "Last edited by #{@page.gollum_page.version.author.name.gsub(/<>/, '')} #{time_ago_in_words(@page.gollum_page.version.authored_date)} ago." %></small>
-      <h3>Content</h3>
       <p>
-        <%= raw(@page.content) %>
+        <%= @page.preview %>
       </p>
       <%= link_to '(Edit)', edit_page_path %>
     </div>
   </div>
 </div>
 
+<br>
 
 
-<%= link_to 'Back', nodes_path %>
+<%= button_to('Back', nodes_path, :class => 'btn btn-large btn-primary', method: :get)  %>

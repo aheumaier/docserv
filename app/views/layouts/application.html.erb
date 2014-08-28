@@ -47,12 +47,21 @@
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-small">Submit</button>
+                <button type="submit" class="btn btn-small">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
               </form>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>
+      <!-- enable notification at page head -->
+      <% flash.each do |type, message| %>
+          <div class="alert <%= bootstrap_class_for(type) %> fade in">
+            <button class="close" data-dismiss="alert">×</button>
+            <%= message %>
+          </div>
+      <% end %>
 
       <%= yield %>
 

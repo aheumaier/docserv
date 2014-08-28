@@ -19,9 +19,12 @@ class NodesController < ApplicationController
     @page = Page.find_or_initialize_by_name(@node_artifact_id, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+@node_artifact_id })
     unless @page.persisted?
       begin
-        logger.info "Logger: calling @page.save"
+        logger.info 'Logger: calling update_attributes on Nodes#show '
+        @page.update_attributes(commit: @node.render_wiki_template, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'updated template on '+@node_artifact_id })
         @page.save
+        flash[:success] = "Successfully persisting page."
       rescue => e
+        flash[:error] = "Error occured while persisting page."
         logger.error e.message
         logger.error e.backtrace.join("\n")
       end

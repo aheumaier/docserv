@@ -7,7 +7,7 @@ class Fact < ActiveResource::Base
   end
 
   self.site = "http://puppetdb001.int.arvm.de:8080/v3"
-  self.element_name = "facts"
+  self.element_name = "facts-names"
   self.format = ::JsonFormatter.new('facts')
 
   def nodes

@@ -36,7 +36,7 @@ class PagesController < ApplicationController
     logger.info 'Logger: calling Page#create '
     @page = Page.new(params[:page])
     if @page.save
-      flash[:notice] = "Successfully created page."
+      flash[:success] = "Successfully created page."
       redirect_to @page
     else
       render :action => 'new'
@@ -53,10 +53,9 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     params[:page]['commit'] = { name: 'system', email: 'sysop@mondiamedia.com', message: 'Updated page '+params[:id] }
     if @page.update_attributes(params[:page])
-      flash[:notice] = "Successfully updated page."
+      flash[:success] = "Successfully updated page."
       redirect_to @page
     else
-      logger.info 'Logger: calling Page#udate : Failed '
       render :action => 'edit'
     end
   end

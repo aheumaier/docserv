@@ -22,5 +22,10 @@ class Node < ActiveResource::Base
     Node.find(:first, :from => '/v3/nodes/'+self.name+'/facts/system_role').value
   end
 
+  def render_wiki_template
+    view.render "lib/templates/node_wiki_template.md.erb"
+  end
+
+
 
 end
