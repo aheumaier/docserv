@@ -17,6 +17,15 @@ class NodesController < ApplicationController
     @node_facts = @node.facts
     @node_artifact_id = @node.artifact_id
     @page = Page.find_or_initialize_by_name(@node_artifact_id, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+@node_artifact_id })
+    unless @page.persisted?
+      begin
+        logger.info "Logger: calling @page.save"
+        @page.save
+      rescue => e
+        logger.error e.message
+        logger.error e.backtrace.join("\n")
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

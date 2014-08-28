@@ -7,6 +7,7 @@ Docserv::Application.configure do
   config.cache_classes = false
 
   Rails.logger = Logger.new(STDOUT)
+  Rails.logger.level = 0 # at any time
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
