@@ -14,4 +14,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap
+//= require highlight_js/highlight
+//= require highlight_js/languages/ruby
 //= require_tree .
+
+hljs.initHighlightingOnLoad();
+

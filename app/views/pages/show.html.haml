@@ -1,5 +1,4 @@
 %h4
-  = "Page name: #{@page.title}"
   = link_to '(Edit)', edit_page_path
   = link_to '(Destroy)', @page, :remote => true, :confirm => 'Are you sure?', :method => :delete
   
@@ -7,6 +6,6 @@
 
 %hr
 
-= @page.preview(format=:markdown)
+= render :partial => "pages/staticmarkup", language: 'Markdown!'
 
 %hr

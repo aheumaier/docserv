@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   #before_filter :find_body, :only => [:edit]
 
   def new
+    logger.info 'Logger: calling Page#new '
     @page = Page.new
   end
 

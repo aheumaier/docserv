@@ -22,8 +22,8 @@ class Node < ActiveResource::Base
     Node.find(:first, :from => '/v3/nodes/'+self.name+'/facts/system_role').value
   end
 
-  def render_wiki_template
-    view.render "lib/templates/node_wiki_template.md.erb"
+  def render_template( file='lib/templates/node_wiki_template.md.erb', options_hash={ template_artifact_id:"#{@node_artifact_id}" } )
+    Erubis::Eruby.new( File.read(file) ).result(options_hash)
   end
 
 

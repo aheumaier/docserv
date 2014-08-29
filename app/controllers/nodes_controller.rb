@@ -17,10 +17,13 @@ class NodesController < ApplicationController
     @node_facts = @node.facts
     @node_artifact_id = @node.artifact_id
     @page = Page.find_or_initialize_by_name(@node_artifact_id, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+@node_artifact_id })
+
     unless @page.persisted?
       begin
         logger.info 'Logger: calling update_attributes on Nodes#show '
-        @page.update_attributes(commit: @node.render_wiki_template, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'updated template on '+@node_artifact_id })
+        node_template = Erubis::Eruby.new( File.read('lib/templates/node_wiki_template.md.erb') ).result({my_artifact_id:"#{@node_artifact_id}"})
+        logger.info node_template
+        @page.update_attributes(content: node_template, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'updated template on '+@node_artifact_id })
         @page.save
         flash[:success] = "Successfully persisting page."
       rescue => e

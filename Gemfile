@@ -9,10 +9,12 @@ gem 'gollum_editor'
 gem 'activeresource'
 gem 'json'
 gem 'haml'
-gem 'awesome_nested_set'
+gem 'markdown-rails'
+gem 'github-markup'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
-
+gem 'highlight_js-rails'
+gem 'redcarpet'
 
 # Gems used only for assets and not required
 # in production environments by default.

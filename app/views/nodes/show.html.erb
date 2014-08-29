@@ -35,17 +35,15 @@
 
 <div class="tab-content">
   <div id="status_tab"  class="tab-pane active">
-    <div class="container">
-      <p></p>
-      Node Status
-    </div>
+    <p></p>
+    Node Status
   </div>
+
   <div id="puppet_tab"  class="tab-pane">
-    <div class="container">
-      <p></p>
-      Last Puppet Run: <%= @node_facts['last_run']%>
-    </div>
+    <p></p>
+    Last Puppet Run: <%= @node_facts['last_run']%>
   </div>
+
   <div id="resources_tab"  class="tab-pane">
 
     <table class="table table-condensed" >
@@ -81,17 +79,17 @@
   </div>
 
   <div id="wiki_tab"  class="tab-pane">
-    <div class="container">
-      <small><%= "Last edited by #{@page.gollum_page.version.author.name.gsub(/<>/, '')} #{time_ago_in_words(@page.gollum_page.version.authored_date)} ago." %></small>
-      <p>
-        <%= @page.preview %>
-      </p>
-      <%= link_to '(Edit)', edit_page_path %>
-    </div>
+    <p></p>
+    <%= button_to('Edit', edit_page_path(@page.name), :class => 'btn btn-large btn-primary', method: :get)  %> <small><%= "Last edited by #{@page.gollum_page.version.author.name.gsub(/<>/, '')} #{time_ago_in_words(@page.gollum_page.version.authored_date)} ago." %></small>
+
+    <p>
+      <%= @page.preview %>
+    </p>
   </div>
 </div>
 
 <br>
 
-
-<%= button_to('Back', nodes_path, :class => 'btn btn-large btn-primary', method: :get)  %>
+<ul class="pager">
+  <li class="previous"><%=  link_to('Back', nodes_path ) %></li>
+</ul>
