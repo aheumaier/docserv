@@ -1,5 +1,8 @@
 Docserv::Application.routes.draw do
 
+  resources :mc_exporters
+
+
   resources :pages
   resources :facts
   resources :nodes

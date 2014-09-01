@@ -1,0 +1,25 @@
+<%= form_for(@mc_exporter) do |f| %>
+  <% if @mc_exporter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mc_exporter.errors.count, "error") %> prohibited this mc_exporter from being saved:</h2>
+
+      <ul>
+      <% @mc_exporter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :last_run %><br />
+    <%= f.text_field :last_run %>
+  </div>
+  <div class="field">
+    <%= f.label :puppet_classes %><br />
+    <%= f.text_field :puppet_classes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

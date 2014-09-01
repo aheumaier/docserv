@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Last run:</b>
+  <%= @mc_exporter.last_run %>
+</p>
+
+<p>
+  <b>Puppet classes:</b>
+  <%= @mc_exporter.puppet_classes %>
+</p>
+
+
+<%= link_to 'Edit', edit_mc_exporter_path(@mc_exporter) %> |
+<%= link_to 'Back', mc_exporters_path %>

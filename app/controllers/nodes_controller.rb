@@ -16,7 +16,9 @@ class NodesController < ApplicationController
     @node = Node.find(params[:id].gsub('_', '.'))
     @node_facts = @node.facts
     @node_artifact_id = @node.artifact_id
+    @mc_data =  McExporter.find_by(fqdn: @node.name )
     @page = Page.find_or_initialize_by_name(@node_artifact_id, commit: { name: 'system', email: 'sysop@mondiamedia.com', message: 'created page '+@node_artifact_id })
+
 
     unless @page.persisted?
       begin

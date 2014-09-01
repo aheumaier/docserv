@@ -5,21 +5,26 @@
     <div class="page-header">
       <h1><%= @node.name %> <br> <small><%= @node_artifact_id %></small></h1>
     </div>
-
-    <% unless  @node.deactivated.nil? %>
-        <p>
+    <p>
+      <% unless  @node.deactivated.nil? %>
           <span class="label label-danger">Node deactivated</span>
-        </p>
-    <% else %>
-        <p>
+      <% else %>
           <span class="label label-success">Node active</span>
-        </p>
-        <i>Catalog timestamp:</i>
-        <%= @node.catalog_timestamp %><br>
-        <i>Facts timestamp:</i>
-        <%= @node.facts_timestamp %>
-    <%end %>
-  </div>
+      <% end %>
+      <% unless @node_facts['on_warranty'] == 'true' %>
+          <span class="label label-warning">No Warranty</span>
+          </p>
+      <% else %>
+          <span class="label label-success">Warranty</span>
+      <%end %>
+      </p>
+      <i>Catalog timestamp:</i>
+      <%= @node.catalog_timestamp %><br>
+      <i>Facts timestamp:</i>
+      <%= @node.facts_timestamp %>
+
+
+      </div>
 </div>
 
 
@@ -40,8 +45,38 @@
   </div>
 
   <div id="puppet_tab"  class="tab-pane">
+    <table class="table table-condensed" >
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Last Puppet Run: </td>
+        <td><%= @node_facts['last_run']%></td>
+      </tr>
+      <% @mc_data.puppet_last_run_summary['resources'].each do |k,v| %>
+          <tr>
+            <td><%= k %></td>
+            <td><%= v %></td>
+          </tr>
+      <% end  %>
+    </table>
     <p></p>
-    Last Puppet Run: <%= @node_facts['last_run']%>
+    <table class="table table-condensed" >
+      <tr>
+        <th>Puppet Classes</th>
+      </tr>
+      <% @mc_data.classes.sort.each do |k,v| %>
+          <tr>
+            <td><%= k %></td>
+          </tr>
+
+      <% end  %>
+
+
+
+
+    </table>
   </div>
 
   <div id="resources_tab"  class="tab-pane">
@@ -51,7 +86,6 @@
         <th>Name</th>
         <th>Value</th>
       </tr>
-
       <% @node_facts.each do |k,v| %>
           <tr>
             <td><%= k %></td>
@@ -69,7 +103,7 @@
         <th>Value</th>
       </tr>
 
-      <% @node_facts.each do |k,v| %>
+      <% @node_facts.sort.each do |k,v| %>
           <tr>
             <td><%= k %></td>
             <td><%= v %></td>

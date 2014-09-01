@@ -1,6 +1,6 @@
 %h4
-  = link_to '(Edit)', edit_page_path
-  = link_to '(Destroy)', @page, :remote => true, :confirm => 'Are you sure?', :method => :delete
+  = link_to 'Edit', edit_page_path
+  = link_to 'Destroy', @page, :remote => true, :confirm => 'Are you sure?', :method => :delete
   
   %small= "Last edited by #{@page.gollum_page.version.author.name.gsub(/<>/, '')} #{time_ago_in_words(@page.gollum_page.version.authored_date)} ago."
 

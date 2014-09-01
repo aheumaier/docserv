@@ -1,4 +1,5 @@
 require 'json'
+
 class Node < ActiveResource::Base
   include ActiveResource::Extend::WithoutExtension
 
@@ -16,6 +17,12 @@ class Node < ActiveResource::Base
     pocket = Hash.new
     Node.find(:all, :from => '/v3/nodes/'+self.name+'/facts').map {|n| pocket[n.name] = n.value }
     return pocket
+  end
+
+  def resources
+    # Node.find(:all, :from => 'v3/resources  --data-urlencode query=\'["=", "certname", "' + self.id + '"]\''  )
+    Node.get(:resources,  :query => '\'["=", "certname", "' + self.id + '"]\'' )
+    # get(:search, :last_name => 'smith')
   end
 
   def artifact_id
